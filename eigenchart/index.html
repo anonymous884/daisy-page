@@ -1,0 +1,115 @@
+<!doctype html>
+
+<head>
+    <script src="https://distill.pub/template.v2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="chart_decor.js"></script>
+    <script src="chart_update.js"></script>
+</head>
+
+<body>
+
+    <table class="eigenchart_table">
+        <!-- Emotion Synthesis Header -->
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <!-- Emotion Synthesis Row -->
+            <tr>
+                
+
+                 <!-- Emotion Table -->
+                <td style="vertical-align: top;">
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Emotion A</th>
+                                <th></th>
+                                <th>Emotion B</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select id="emotion_a" class="dynamic_opt" onchange="changeData()">
+                                        <option value="joy">Joy</option>
+                                        <option value="anger">Anger</option>
+                                        <option value="sadness" selected>Sadness</option>
+                                        <option value="surprise">Surprise</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <b>+</b>
+                                </td>
+                                <td>
+                                    <select id="emotion_b" class="dynamic_opt" onchange="changeData()">
+                                        <option value="none">--</option>
+                                        <option value="joy">Joy</option>
+                                        <option value="anger">Anger</option>
+                                        <option value="sadness">Sadness</option>
+                                        <option value="surprise">Surprise</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">
+                                    <input type="range" class="dynamic_scale" id="scaler_a" min="0.25" max="2.0" step="0.25" value="1.0" onchange="changeData()" oninput="this.nextElementSibling.value=this.value">
+                                    <output>1.0</output>
+                                </td>
+                                <td></td>
+                                <td style="text-align:left">
+                                    <input type="range" class="dynamic_scale" id="scaler_b" min="0.25" max="2.0" step="0.25" value="1.0" onchange="changeData()" oninput="this.nextElementSibling.value=this.value">
+                                    <output>1.0</output>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br>
+                                    <p align="left"><b>Speaker</b><br>
+                                    <select id="speakers" class="dynamic_opt" onchange="changeData()">
+                                        <option value="esd-0019" selected>esd-0019</option>          
+                                    </select>
+                                    </p>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <br>
+                                    <p align="left"><b>Text</b><br>
+                                    <select id="texts" class="dynamic_opt" onchange="changeData()">
+                                        <option value="txt-13" selected>How do you know this?</option>
+                                        <option value="txt-19">Life beat you to it by years.</option>
+                                    </select>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <audio controls style="width: 100%" id="wave_display" src="assets/samples/daisy/sadness/spk=esd-0019--emo=sadness--txt=txt-13--s_a=1.00--s_b=0.0.wav"></audio>
+                </td>
+                
+                <!-- Eigen Chart -->
+                <td style="vertical-align: top;">
+                    <div class="dynamic_canvas">
+                        <canvas id="eigenchart_canvas"></canvas>
+                        <script src="chart_display.js"></script>
+                    </div>
+                </td>
+            </tr>
+        </tbody>    
+    </table>
+
+    
+
+</body>

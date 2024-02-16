@@ -1,0 +1,78 @@
+
+tr td {
+    text-align: center;
+}
+
+p {
+    padding-bottom: 2px;
+}
+
+.eigenchart_table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style for large screens */
+.dynamic_opt {
+    width: 240px; /* Adjust as needed */
+}
+
+.dynamic_scale {
+    width: 190px;
+}
+
+
+.dynamic_canvas {
+    width: 350px;
+    height: 350px;
+}
+
+/* Medium screens (e.g., small desktops, large tablets) */
+@media (max-width: 1200px) {
+    .dynamic_opt {
+        width: 180px /* Adjust as needed */
+    }
+
+    .dynamic_scale {
+        width: 140px;
+    }
+
+    .dynamic_canvas {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Small screens (e.g., tablets) */
+@media (max-width: 680px) {
+    .dynamic_opt {
+        width: 130px; /* Adjust as needed */
+    }
+
+    .dynamic_scale {
+        width: 95px;
+    }
+
+    .dynamic_canvas {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+/* Extra small screens (e.g., phones) */
+@media (max-width: 500px) {
+    .dynamic_opt {
+        width: 120px; /* Adjust as needed */
+    }
+
+    .dynamic_scale {
+        width: 80px;
+    }
+
+
+    .dynamic_canvas {
+        width: 190px;
+        height: 190px;
+    }
+}
+}

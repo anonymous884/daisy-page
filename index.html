@@ -60,7 +60,7 @@
     <d-front-matter>
         <script type="text/json">{
         "title": "Daisy-TTS",
-        "description": "Simulating Mixed Emotions with Prosody Latent Representation",
+        "description": "Simulating Wider Spectrum of Emotions\\via Prosody Embedding Decomposition",
         "authors": [
           {
             "author":"Anonymous Authors",
@@ -81,7 +81,7 @@
     <!-- Section: Title -->
     <d-title>
         <h1><img style="width:65px;height:65px;" src="assets/logo/daisy-tts-logo.png">   Daisy-TTS</h1>
-        <p>Simulating Mixed Emotions with Prosody Latent Representation.</p>
+        <p>Simulating Wider Spectrum of Emotions via Prosody Embedding Decomposition.</p>
     </d-title>
     <d-byline></d-byline>
 
@@ -90,20 +90,16 @@
     <!-- Section: Abstract -->
     
     <p>
-        Daisy-TTS is a 
-        <a style="color:blue" href="https://en.wikipedia.org/wiki/Prosody_(linguistics)" class="tooltip" target="_blank">
-            prosody
-            <span class="tooltiptext">Prosody refers to the rhythm, stress, and intonation of speech.</span>
-        </a>-controllable text-to-speech model that simulates the structural model of emotions. 
-        We learn emotionally-clustered prosody embeddings and manipulate them to produce synthetic emotions.
+        We introduce Daisy-TTS, and emotional text-to-speech design, grounded on the <a style="color:blue" href="https://en.wikipedia.org/wiki/Emotion_classification#Plutchik's_wheel_of_emotions" target="_blank">structural model of emotions</a>, to simulate wide spectrum of emotion through learning emotionally-separable prosody embeddings.
     </p>
 
     <p>
-    Following the <a style="color:blue" href="https://en.wikipedia.org/wiki/Emotion_classification#Plutchik's_wheel_of_emotions" target="_blank">structural model of emotions</a>, Daisy can:
+    Through learning and decomposing the learned embeddings, Daisy-TTS capable of simulating:
     <ul>
-        <li>Combine embeddings of primary emotions to produce mixed emotions. For example, 'Envy' is synthesized from the embeddings of 'Anger' + 'Sadness'.</li>
-        <li>Adjust the intensity of an emotion by manipulating the embedding's magnitude!</li>
-        <li>Create a polar emotion by negating the embedding. The polar opposite of Sad is Joy!</li>
+        <li><b>Primary Emotions</b>, as learned from the training samples, e.g. <i>joy</i>, <i>sadness</i>, <i>anger</i>.</li>
+        <li><b>Secondary Emotions</b>, as a mixture of primary emotions, e.g. <i>envy</i> = <i>sadness</i> + <i>anger</i>.</li>
+        <li><b>Intensity-level</b>, by scaling the emotion embedding, e.g. <i>rage</i> = 2 * <i>anger</i>. </li>
+        <li><b>Emotions Polarity</b>, by negating the emotion embedding, e.g. <i>sadness</i> = - <i>joy</i>.</li>
     </ul>
     </p>
     <p>

@@ -49,7 +49,7 @@ function setup() {
     let offset_x = 60
 
     CustomImage("assets/embedding-space/space-joy.png", img_width, ints2opac[0.0], "img_joy", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-sadness.png", img_width, ints2opac[0.0], "img_sadness", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-sadness.png", img_width, ints2opac[1.0], "img_sadness", img_offset_x, img_offset_y)
     CustomImage("assets/embedding-space/space-anger.png", img_width, ints2opac[0.0], "img_anger", img_offset_x, img_offset_y)
     CustomImage("assets/embedding-space/space-surprise.png", img_width, ints2opac[0.0], "img_surprise", img_offset_x, img_offset_y)
     

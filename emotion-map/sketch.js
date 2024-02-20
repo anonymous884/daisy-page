@@ -4,6 +4,8 @@ let canvas_color = [255,255,255]
 
 var img_width = 600
 
+var polarize_checked = false
+
 var CLICKED_COUNT = 0
 var emo_list = [
     "anger", "sadness", "joy", "surprise",
@@ -16,12 +18,12 @@ var text_dict = {
     // "You are not attending the event.": 4,
     // "He was so close to me.": 5,
     // "We are running out of milk.": 6,
-    // "Let me tell you something.": 7,
-    // "That's exactly what happened.": 8,
+    "Let me tell you something.": 7,
+    "That's exactly what happened.": 8,
     // "Can you believe it.": 9,
     "Again, overall, not just for me.": 10
 }
-var active_emo = "-"
+var active_emo = "sadness"
 var ints2opac = {
     0.0: 0.25,
     0.25: 0.75,
@@ -33,9 +35,7 @@ var ints2opac = {
     1.75: 1.0,
 }
 
-function preload() {
-    latent_coords = loadJSON('assets/waves/custom_texts_v3_coords-px.json')
-}
+
 
 function setup() {
 
@@ -48,17 +48,17 @@ function setup() {
     let offset_y = 80
     let offset_x = 60
 
-    CustomImage("assets/embedding-space/space-joy.png", img_width, ints2opac[0.0], "img_joy", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-sadness.png", img_width, ints2opac[1.0], "img_sadness", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-anger.png", img_width, ints2opac[0.0], "img_anger", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-surprise.png", img_width, ints2opac[0.0], "img_surprise", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-joy-v2.png", img_width, ints2opac[0.0], "img_joy", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-sadness-v2.png", img_width, ints2opac[1.0], "img_sadness", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-anger-v2.png", img_width, ints2opac[0.0], "img_anger", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-surprise-v2.png", img_width, ints2opac[0.0], "img_surprise", img_offset_x, img_offset_y)
     
-    CustomImage("assets/embedding-space/space-bittersweetness.png", img_width, ints2opac[0.0], "img_bittersweetness", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-delight.png", img_width, ints2opac[0.0], "img_delight", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-envy.png", img_width, ints2opac[0.0], "img_envy", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-pride.png", img_width, ints2opac[0.0], "img_pride", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-outrage.png", img_width, ints2opac[0.0], "img_outrage", img_offset_x, img_offset_y)
-    CustomImage("assets/embedding-space/space-disappointment.png", img_width, ints2opac[0.0], "img_disappointment", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-bittersweetness-v2.png", img_width, ints2opac[0.0], "img_bittersweetness", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-delight-v2.png", img_width, ints2opac[0.0], "img_delight", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-envy-v2.png", img_width, ints2opac[0.0], "img_envy", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-pride-v2.png", img_width, ints2opac[0.0], "img_pride", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-outrage-v2.png", img_width, ints2opac[0.0], "img_outrage", img_offset_x, img_offset_y)
+    CustomImage("assets/embedding-space/space-disappointment-v2.png", img_width, ints2opac[0.0], "img_disappointment", img_offset_x, img_offset_y)
 
     Interface(canvas_width/2, canvas_height/8, offset_x, offset_y)
 

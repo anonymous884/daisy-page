@@ -75,6 +75,7 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
         }
 
         active_emo = emo.toLowerCase()
+        sample_emotion()
     }
 
     function intensity_slider_changed() {
@@ -83,6 +84,7 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
         if (active_emo != "-") {
             document.getElementById("img_" + active_emo).style.opacity = ints2opac[document.getElementById("intensity_slider").value]
         }
+        sample_emotion()
     }
 
     function sample_emotion() {
@@ -95,14 +97,20 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
                 alpha_ = "1.0"
             }
             let txt_id_ = text_dict[document.getElementById("txt_dropdown").value]
-            let n_ = Math.floor(Math.random()*2) + 1
-            let wavepath = "model=" + model_ + "-" + "spk=" + spk_ + "-" + "emo=" + emo_ + "-" + "s=" + alpha_ + "-" + "txt=" + txt_id_ + "-" + "n=" + n_ + ".wav"
-            wavepath = "assets/waves/custom_texts/" + wavepath
+            let wavepath = ""
+            if (polarize_checked) {
+                wavepath = "model=" + model_ + "-" + "spk=" + spk_ + "-" + "emo=" + emo_ + "-" + "s=-" + alpha_ + "-" + "txt=" + txt_id_ + ".wav"
+            }
+            else {
+                wavepath = "model=" + model_ + "-" + "spk=" + spk_ + "-" + "emo=" + emo_ + "-" + "s=" + alpha_ + "-" + "txt=" + txt_id_ + ".wav"
+            }
+            console.log(wavepath)
+            wavepath = "assets/waves/" + wavepath
             document.getElementById("waveplayer").src = wavepath
 
             // console.log(wavepath)
-            let wavepath_ = wavepath.split("/")[3]
-            let latent_coord = latent_coords[wavepath_]
+            // let wavepath_ = wavepath.split("/")[3]
+            // let latent_coord = latent_coords[wavepath_]
             // let x = latent_coord[0]/5 - 100
             // let y = latent_coord[1]/5 + 100
             // this.coord.position(x, y)
@@ -110,9 +118,14 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
         }
     }
 
+    function polarize_option_changed() {
+        polarize_checked = this.checked()
+        sample_emotion()
+    }
+
     this.obj = createDiv()
 
-    this.obj.emo_header = createP("Select Emotion: ")
+    this.obj.emo_header = createP("Select Emotion: Sadness")
     this.obj.emo_header.id("emo_header")
     this.obj.emo_header.position(pos_x-offset_x, pos_y-offset_y)
 
@@ -139,6 +152,14 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
     this.obj.emo_dropdown_b.option("Surprise")
     this.obj.emo_dropdown_b.option("Anger")
     this.obj.emo_dropdown_b.changed(emo_dropdown_changed)
+
+    this.obj.polarize_option = createCheckbox()
+    this.obj.polarize_option.id("polarize")
+    this.obj.polarize_option.position(pos_x+215-offset_x, pos_y+40-offset_y)
+    this.obj.polarize_option.changed(polarize_option_changed)
+
+    this.obj.polarize_option.txt = createP("Polarize")
+    this.obj.polarize_option.txt.position(pos_x+240-offset_x, pos_y+25-offset_y)
     
 
     this.obj.intensity_header = createP("Intensity: 1")
@@ -162,6 +183,7 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
     this.obj.spk_dropdown.option("0019")
     this.obj.spk_dropdown.option("0020")
     this.obj.spk_dropdown.selected("0016")
+    this.obj.spk_dropdown.changed(sample_emotion)
 
     this.obj.txt_header = createP("Select Text: ")
     this.obj.txt_header.id("txt_header")
@@ -176,15 +198,16 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
     // this.obj.txt_dropdown.option("You are not attending the event.")
     // this.obj.txt_dropdown.option("He was so close to me.")
     // this.obj.txt_dropdown.option("We are running out of milk.")
-    // this.obj.txt_dropdown.option("Let me tell you something.")
-    // this.obj.txt_dropdown.option("That's exactly what happened.")
+    this.obj.txt_dropdown.option("Let me tell you something.")
+    this.obj.txt_dropdown.option("That's exactly what happened.")
     // this.obj.txt_dropdown.option("Can you believe it.")
     this.obj.txt_dropdown.option("Again, overall, not just for me.")
     this.obj.txt_dropdown.selected("How do you know this.")
+    this.obj.txt_dropdown.changed(sample_emotion)
 
-    this.obj.sample_button = createButton("Sample Emotion")
-    this.obj.sample_button.position(pos_x-offset_x, pos_y+275-offset_y)
-    this.obj.sample_button.mouseClicked(sample_emotion)
+    // this.obj.sample_button = createButton("Sample Emotion")
+    // this.obj.sample_button.position(pos_x-offset_x, pos_y+275-offset_y)
+    // this.obj.sample_button.mouseClicked(sample_emotion)
 
     // this.obj.sample_button.coord = createDiv()
     // this.obj.sample_button.coord.id("coord")
@@ -196,11 +219,12 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
 
     this.obj.waveplayer = createAudio("")
     this.obj.waveplayer.id("waveplayer")
-    this.obj.waveplayer.position(pos_x-offset_x, pos_y+310-offset_y)
+    this.obj.waveplayer.position(pos_x-offset_x, pos_y+300-offset_y)
     this.obj.waveplayer.showControls()
 
-    document.getElementById("waveplayer").src = "assets/waves/custom_texts/model=rainbow-spk=0016-emo=sadness-s=1.0-txt=1-n=2.wav"
+    // document.getElementById("waveplayer").src = "assets/waves/custom_texts/model=rainbow-spk=0016-emo=sadness-s=1.0-txt=1-n=2.wav"
 
+    sample_emotion()
 }
 
 

@@ -50,6 +50,13 @@
         .caption {
             text-align: center;
         }
+
+        .floating_text {
+          position: absolute;
+          top: 1545px;
+          left: 440px;
+          /* z-index: 1; */
+        }
   </style>
 </head>
 
@@ -89,7 +96,7 @@
     <!-- Section: Introduction -->
     <h2>Introduction</h2>
     <p>
-        We introduce Daisy-TTS, and emotional text-to-speech design, grounded on the structural model of emotions<d-cite key="plutchik1984emotions"></d-cite>, to simulate wide spectrum of emotion through learning emotionally-separable prosody embeddings.
+        We introduce Daisy-TTS, and emotional text-to-speech design, grounded on the structural model of emotions <d-cite key="plutchik1984emotions"></d-cite>, to simulate wide spectrum of emotion through learning emotionally-separable prosody embeddings.
     </p>
 
     <p>
@@ -116,8 +123,12 @@
         Below we can listen to emotional speech simulated by Daisy-TTS, with algorithm described in Section 3 of the paper. We can simulate a primary emotion, or secondary emotion by mixing the primary ones, and simulate its intensity and polarity.
     </p>
 
+    <div class="floating_text">
+      <p>Baseline <d-cite key="zhou2022speech"></d-cite></p>
+    </div>
+
     <div style="text-align:center">
-      <iframe src="emotion-map/index.html" frameBorder="0" width="1000px" height="450px" scrolling="no"></iframe>
+      <iframe src="emotion-map/index.html" frameBorder="0" width="1000px" height="505px" scrolling="no"></iframe>
     </div>
 
     <d-bibliography src="bibliography.bib"></d-bibliography>

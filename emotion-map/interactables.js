@@ -63,7 +63,9 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
             emo = "Anger"
         }
         
-        document.getElementById("emo_header").textContent = "Select Emotion:  " + emo
+        document.getElementById("emo_header").textContent = emo
+        document.getElementById("emo_header").style.color = emo_colors[emo.toLowerCase()]
+        // document.getElementById("emo_header").style.fontWeight = "bold"
 
         for (let i=0; i < 10; i++) {
             if (emo_list[i] != emo.toLowerCase()) {
@@ -98,23 +100,32 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
             }
             let txt_id_ = text_dict[document.getElementById("txt_dropdown").value]
             let wavepath = ""
+            let polarized = false
             if (polarize_checked) {
                 wavepath = "model=" + model_ + "-" + "spk=" + spk_ + "-" + "emo=" + emo_ + "-" + "s=-" + alpha_ + "-" + "txt=" + txt_id_ + ".wav"
+                document.getElementById("emo_header").textContent = "- " + document.getElementById("emo_header").textContent
+                polarized = true
             }
             else {
                 wavepath = "model=" + model_ + "-" + "spk=" + spk_ + "-" + "emo=" + emo_ + "-" + "s=" + alpha_ + "-" + "txt=" + txt_id_ + ".wav"
+                document.getElementById("emo_header").textContent = document.getElementById("emo_header").textContent.replace("- ", "")
+                polarized = false
             }
-            console.log(wavepath)
+            // console.log(wavepath)
             wavepath = "assets/waves/" + wavepath
             document.getElementById("waveplayer").src = wavepath
+            
+            let wavepath_baseline = wavepath
+            wavepath_baseline = wavepath_baseline.replace("model=rainbow", "model=cloud").replace("/waves/", "/waves_baseline/")
+            document.getElementById("baseline_waveplayer").src = wavepath_baseline
 
-            // console.log(wavepath)
-            // let wavepath_ = wavepath.split("/")[3]
-            // let latent_coord = latent_coords[wavepath_]
-            // let x = latent_coord[0]/5 - 100
-            // let y = latent_coord[1]/5 + 100
-            // this.coord.position(x, y)
-            // console.log(x, y)
+            if (polarized || spk_ != "0019") {
+                document.getElementById("waveplayer_baseline_header").textContent = "(Not Supported)"
+                document.getElementById("waveplayer_baseline_header").style.color = "#FF3863"
+            }
+            else {
+                document.getElementById("waveplayer_baseline_header").textContent = ""
+            }
         }
     }
 
@@ -125,9 +136,14 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
 
     this.obj = createDiv()
 
-    this.obj.emo_header = createP("Select Emotion: Sadness")
+    this.obj.emo_header_prefix = createP("Select Emotion: ")
+    this.obj.emo_header_prefix.position(pos_x-offset_x, pos_y-offset_y)
+    
+    this.obj.emo_header = createP("Sadness")
+    this.obj.emo_header.style("color", emo_colors["sadness"])
+    this.obj.emo_header.style("fontWeight", "bold")
     this.obj.emo_header.id("emo_header")
-    this.obj.emo_header.position(pos_x-offset_x, pos_y-offset_y)
+    this.obj.emo_header.position(pos_x-offset_x+125, pos_y-offset_y)
 
     this.obj.emo_dropdown_a = createSelect()
     this.obj.emo_dropdown_a.id("emo_dropdown_a")
@@ -182,7 +198,7 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
     this.obj.spk_dropdown.option("0013")
     this.obj.spk_dropdown.option("0019")
     this.obj.spk_dropdown.option("0020")
-    this.obj.spk_dropdown.selected("0016")
+    this.obj.spk_dropdown.selected("0019")
     this.obj.spk_dropdown.changed(sample_emotion)
 
     this.obj.txt_header = createP("Select Text: ")
@@ -217,10 +233,22 @@ function Interface(pos_x, pos_y, offset_x, offset_y) {
     // this.obj.sample_button.coord.style("width", "12.5px")
     // this.obj.sample_button.coord.style("border-radius", "50%")
 
+    this.obj.wave_daisy_header = createP("Daisy-TTS")
+    this.obj.wave_daisy_header.position(pos_x-offset_x, pos_y+255-offset_y)
+
     this.obj.waveplayer = createAudio("")
     this.obj.waveplayer.id("waveplayer")
     this.obj.waveplayer.position(pos_x-offset_x, pos_y+300-offset_y)
     this.obj.waveplayer.showControls()
+
+    this.obj.wave_baseline_header = createP("")
+    this.obj.wave_baseline_header.id("waveplayer_baseline_header")
+    this.obj.wave_baseline_header.position(pos_x-offset_x+100, pos_y+341-offset_y)
+
+    this.obj.baseline_waveplayer = createAudio("")
+    this.obj.baseline_waveplayer.id("baseline_waveplayer")
+    this.obj.baseline_waveplayer.position(pos_x-offset_x, pos_y+380-offset_y)
+    this.obj.baseline_waveplayer.showControls()
 
     // document.getElementById("waveplayer").src = "assets/waves/custom_texts/model=rainbow-spk=0016-emo=sadness-s=1.0-txt=1-n=2.wav"
 

@@ -35,6 +35,21 @@ var ints2opac = {
     1.75: 1.0,
 }
 
+var emo_colors = {
+    'joy': '#ffe600',
+    'sadness': '#1a66b2',
+    'surprise': '#00af55',
+    'anger': '#e3007d',
+    'bittersweetness': '#8ca659',
+    'delight': '#80ca2a',
+    'disappointment': '#0d8b84',
+    'envy': '#7e3398',
+    'outrage': '#715869',
+    'pride': '#f1733e',
+    'polar joy': '#ff7300',
+    'polar sadness': '#1a33b2',
+    'neutral': '#607196'
+}
 
 
 function setup() {
